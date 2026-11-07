@@ -149,19 +149,33 @@
     var x = null, y = null, lock = null, dx = 0;
     var startT = null;
     function selecting() { try { var s = window.getSelection(); return !!(s && !s.isCollapsed && String(s).length > 0 && startT && s.containsNode && s.containsNode(startT, true)); } catch (e) { return false; } }
-    document.addEventListener("touchstart", function (e) {
-      var t = e.target; if (e.touches.length !== 1 || (t && t.closest && t.closest("a,button,input,textarea,select,#qm-theme-root"))) { x = null; return; }
-      startT = t; x = e.touches[0].clientX; y = e.touches[0].clientY; lock = null; dx = 0;
-    }, { passive: true });
-    document.addEventListener("touchmove", function (e) {
-      if (x == null) return; var ddx = e.touches[0].clientX - x, ddy = e.touches[0].clientY - y; dx = ddx;
+    // Browsers claim horizontal pans (touchcancel / pointercancel) unless touch-action reserves them for us.
+    var st = document.createElement("style"); st.textContent = "main.ulum-book,main.ulum-book *{touch-action:pan-y pinch-zoom}"; (document.head || document.documentElement).appendChild(st);
+    function down(px, py, t) {
+      if (t && t.closest && t.closest("a,button,input,textarea,select,#qm-theme-root")) { x = null; return; }
+      startT = t; x = px; y = py; lock = null; dx = 0;
+    }
+    function move(px, py) {
+      if (x == null) return; var ddx = px - x, ddy = py - y; dx = ddx;
       if (!lock && (Math.abs(ddx) > 8 || Math.abs(ddy) > 8)) lock = Math.abs(ddx) > Math.abs(ddy) * 1.3 ? "x" : "y";
-    }, { passive: true });
-    document.addEventListener("touchend", function () {
+    }
+    function up() {
       if (x == null) return; var was = lock, d = dx; x = null; lock = null;
       if (was !== "x" || Math.abs(d) < 48 || selecting()) return;
       var u = d > 0 ? next : prev; if (u) location.assign(u);
-    }, { passive: true });
+    }
+    if (window.PointerEvent) {
+      var pid = null;
+      document.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse" || !e.isPrimary) return; pid = e.pointerId; down(e.clientX, e.clientY, e.target); }, { passive: true });
+      document.addEventListener("pointermove", function (e) { if (e.pointerId === pid) move(e.clientX, e.clientY); }, { passive: true });
+      document.addEventListener("pointerup", function (e) { if (e.pointerId !== pid) return; pid = null; move(e.clientX, e.clientY); up(); }, { passive: true });
+      document.addEventListener("pointercancel", function () { pid = null; x = null; }, { passive: true });
+    } else {
+      document.addEventListener("touchstart", function (e) { if (e.touches.length !== 1) { x = null; return; } down(e.touches[0].clientX, e.touches[0].clientY, e.target); }, { passive: true });
+      document.addEventListener("touchmove", function (e) { move(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      document.addEventListener("touchend", up, { passive: true });
+      document.addEventListener("touchcancel", function () { x = null; }, { passive: true });
+    }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
