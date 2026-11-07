@@ -29,5 +29,4 @@
   .ulum-book .body p{font-size:1.28rem;line-height:2.3}
   .nav nav a{margin-left:1rem}
 }
-
-.ulum-src{margin-top:1.2rem;font-size:.88rem;color:#6b6253;line-height:1.55}.ulum-src .who{margin:0 0 .35rem}.ulum-src details{border-top:1px solid rgba(127,127,127,.25);padding-top:.35rem}.ulum-src summary{cursor:pointer;font-weight:700;list-style-position:inside}.ulum-src details>div{margin-top:.4rem;overflow-wrap:anywhere;word-break:break-word}html.qm-theme-black .ulum-src{color:#a9a293}
+.ulum-credit a{color:inherit;text-decoration:underline}
