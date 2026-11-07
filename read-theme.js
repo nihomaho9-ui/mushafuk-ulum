@@ -146,7 +146,7 @@
     var next = null, prev = null, as = pn.querySelectorAll("a[href]");
     for (var i = 0; i < as.length; i++) { var t = (as[i].textContent || "").trim(); if (/التالي/.test(t)) next = as[i].href; else if (/السابق/.test(t)) prev = as[i].href; }
     if (!next && !prev) return;
-    var x = null, y = null, lock = null, dx = 0;
+    var x = null, y = null, lock = null, dx = 0, mouse = false;
     var startT = null;
     function selecting() { try { var s = window.getSelection(); return !!(s && !s.isCollapsed && String(s).length > 0 && startT && s.containsNode && s.containsNode(startT, true)); } catch (e) { return false; } }
     // Browsers claim horizontal pans (touchcancel / pointercancel) unless touch-action reserves them for us.
@@ -161,12 +161,12 @@
     }
     function up() {
       if (x == null) return; var was = lock, d = dx; x = null; lock = null;
-      if (was !== "x" || Math.abs(d) < 48 || selecting()) return;
+      if (was !== "x" || Math.abs(d) < 48 || (!mouse && selecting())) return;
       var u = d > 0 ? next : prev; if (u) location.assign(u);
     }
     if (window.PointerEvent) {
-      var pid = null;
-      document.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse" || !e.isPrimary) return; pid = e.pointerId; down(e.clientX, e.clientY, e.target); }, { passive: true });
+      var pid = null, mouse = false;
+      document.addEventListener("pointerdown", function (e) { if (!e.isPrimary || (e.pointerType === "mouse" && e.button !== 0)) return; pid = e.pointerId; mouse = e.pointerType === "mouse"; down(e.clientX, e.clientY, e.target); }, { passive: true });
       document.addEventListener("pointermove", function (e) { if (e.pointerId === pid) move(e.clientX, e.clientY); }, { passive: true });
       document.addEventListener("pointerup", function (e) { if (e.pointerId !== pid) return; pid = null; move(e.clientX, e.clientY); up(); }, { passive: true });
       document.addEventListener("pointercancel", function () { pid = null; x = null; }, { passive: true });
