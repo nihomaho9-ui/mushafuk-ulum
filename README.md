@@ -21,3 +21,6 @@ Build stats: {"src": "6d35d0fef9", "html": 181, "ms_removed": 985, "to_main": 14
 
 ## Deferred
 PDF items 2–19, 21–22, 24–28: not added — a complete source text with verified redistribution permission has not been established.
+
+## License
+Book texts come from OpenITI (https://doi.org/10.5281/zenodo.3082463), licensed CC BY-NC-SA 4.0; derived pages here are shared under the same license, non-commercially, with attribution.
