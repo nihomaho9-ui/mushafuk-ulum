@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://t3.mushafuk.online/sitemap-faq.xml
