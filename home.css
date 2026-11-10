@@ -73,3 +73,6 @@ background:radial-gradient(ellipse at 50% 30%,#fffaf0 0,#f4ecdb 60%,#efe5d0 100%
 /* .known chips sit inside the .cards grid: span full row and allow shrinking so they never widen the page */
 .h .cards>.known{grid-column:1/-1;min-width:0;max-width:none;width:auto;margin:6px 0 42px;padding:0}
 .h .known a{max-width:100%;overflow-wrap:anywhere}
+
+/* footer links: allow wrapping on narrow screens */
+.h footer .l{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 0}
