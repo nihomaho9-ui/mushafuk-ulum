@@ -3,7 +3,8 @@
 .ulum-hero h1{color:#fff;margin:0 0 .5rem;font-size:clamp(1.7rem,4vw,2.5rem);font-family:var(--tf-body,Kitab,"Noto Naskh Arabic",Amiri,serif)}
 .ulum-hero p{max-width:40rem;margin:.4rem auto;color:#e6dcc4}
 .ulum-topics{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin:1rem 0 0}
-.ulum-topics a{background:rgba(255,255,255,.12);color:#fbf7ee;border:1px solid rgba(184,146,58,.55);padding:.35rem .75rem;border-radius:999px;font-size:.88rem}
+.ulum-topics a,.ulum-topics a:link,.ulum-topics a:visited{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(184,146,58,.55);padding:.35rem .75rem;border-radius:999px;font-size:.88rem}
+.ulum-topics a:hover{color:#fff;background:rgba(255,255,255,.22)}
 .ulum-wrap{max-width:860px;margin:0 auto;padding:1.2rem 1rem 3.5rem}
 .ulum-card{display:block;background:#fff;border:1px solid #ece3cd;border-radius:16px;padding:1.1rem 1.2rem;margin:0 0 .85rem;box-shadow:0 10px 26px rgba(15,77,58,.05)}
 .ulum-card h2{margin:0 0 .35rem;color:#0b3a2c;font-size:1.25rem;font-family:var(--tf-body,Kitab,"Noto Naskh Arabic",Amiri,serif)}
@@ -20,8 +21,8 @@
 .ulum-book .body p{font-family:var(--tf-body,Kitab,"Noto Naskh Arabic",Amiri,"Scheherazade New",serif);font-size:clamp(1.22rem,3.8vw,1.42rem);line-height:2.25;margin:0 0 .95rem;color:#111;overflow-wrap:anywhere}
 .ulum-book .body p.subh{color:#0f4d3a;font-weight:700;margin-top:1.2rem;border-inline-start:3px solid #b8923a;padding-inline-start:.65rem}
 .ulum-pn{display:flex;justify-content:space-between;gap:1rem;margin:1.2rem 0 0;flex-wrap:wrap}
-.ulum-pn a{background:#0f4d3a;color:#fbf7ee;padding:.55rem 1rem;border-radius:999px;font-weight:600}
-.ulum-pn a:hover{background:#0b3a2c}
+.ulum-pn a,.ulum-pn a:link,.ulum-pn a:visited{background:#0f4d3a;color:#fff;padding:.55rem 1rem;border-radius:999px;font-weight:600}
+.ulum-pn a:hover{background:#0b3a2c;color:#fff}
 .ulum-pn span{visibility:hidden;padding:.55rem 1rem}
 .ulum-credit{margin-top:1.2rem;font-size:.88rem;color:#6b6253;line-height:1.55}
 .nav .logo img{border-radius:6px}
@@ -30,3 +31,11 @@
   .nav nav a{margin-left:1rem}
 }
 .ulum-credit a{color:inherit;text-decoration:underline}
+
+/* Keep nav/filter pill labels light on the green surfaces in every theme */
+html.qm-theme-white .ulum-pn a,html.qm-theme-white .ulum-pn a:link,html.qm-theme-white .ulum-pn a:visited,html.qm-theme-white .ulum-pn a:hover,
+html.qm-theme-black .ulum-pn a,html.qm-theme-black .ulum-pn a:link,html.qm-theme-black .ulum-pn a:visited,html.qm-theme-black .ulum-pn a:hover,
+html.qm-theme-white .ulum-topics a,html.qm-theme-white .ulum-topics a:link,html.qm-theme-white .ulum-topics a:visited,html.qm-theme-white .ulum-topics a:hover,
+html.qm-theme-black .ulum-topics a,html.qm-theme-black .ulum-topics a:link,html.qm-theme-black .ulum-topics a:visited,html.qm-theme-black .ulum-topics a:hover{
+  color:#fff !important;
+}
