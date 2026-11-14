@@ -1,24 +1,39 @@
-# أصول التفسير وعلوم القرآن
+# Mushafuk — ulum al-Quran and usul
 
-> النص العربي الكامل، كل قسم في صفحة. https://t3.mushafuk.online
+> Books on the principles of tafsir and the sciences of the Quran, in full Arabic text, at https://t3.mushafuk.online. Part of Mushafuk (https://mushafuk.online). Free, no ads.
 
-الفهرس: https://t3.mushafuk.online/ulum/
-القسم: https://t3.mushafuk.online/ulum/{id}/{n}/
+This host publishes complete Arabic books as static HTML, one page per section of the work. Sources are listed at https://t3.mushafuk.online/masadir/.
 
-## الكتب
+## Start here
 
-- muqaddima-usul: مقدمة في أصول التفسير، ابن تيمية. 11 فصلًا
-- fadail-quran: فضائل القرآن، أبو عبيد. 70 فصلًا
-- funun-afnan: فنون الأفنان، ابن الجوزي. 154 فصلًا
-- asbab-wahidi: أسباب النزول، الواحدي. 86 فصلًا
-- burhan-zarkashi: البرهان في علوم القرآن، الزركشي. 194 قسمًا
-- gharib-ibn-qutayba: غريب القرآن، ابن قتيبة. 115 فصلًا
-- itqan: الإتقان في علوم القرآن، السيوطي. 96 فصلًا. آخر الكتب في الفهرس
+- [Home](https://t3.mushafuk.online/)
+- [Principles of tafsir](https://t3.mushafuk.online/usul/)
+- [Ulum al-Quran](https://t3.mushafuk.online/ulum-quran/)
+- [Combined catalogue](https://t3.mushafuk.online/ulum/)
+- [Sources](https://t3.mushafuk.online/masadir/)
+- [Madinah mushaf](https://mushafuk.online/)
+- [FAQ](https://t3.mushafuk.online/faq.html)
 
-مثال: https://t3.mushafuk.online/ulum/itqan/1/
+## Books
+
+Principles of tafsir:
+
+- [Muqaddima fi usul al-tafsir](https://t3.mushafuk.online/ulum/muqaddima-usul/) — Ibn Taymiyyah
+
+Ulum al-Quran:
+
+- [Fada'il al-Quran](https://t3.mushafuk.online/ulum/fadail-quran/) — Abu Ubayd al-Qasim ibn Sallam
+- [Funun al-afnan](https://t3.mushafuk.online/ulum/funun-afnan/) — Ibn al-Jawzi
+- [Asbab nuzul al-Quran](https://t3.mushafuk.online/ulum/asbab-wahidi/) — al-Wahidi
+- [al-Burhan fi ulum al-Quran](https://t3.mushafuk.online/ulum/burhan-zarkashi/) — al-Zarkashi
+- [Gharib al-Quran](https://t3.mushafuk.online/ulum/gharib-ibn-qutayba/) — Ibn Qutaybah
+- [al-Itqan fi ulum al-Quran](https://t3.mushafuk.online/ulum/itqan/) — al-Suyuti
+
+## Languages
+
+The book text is Arabic. Short FAQ pages also exist in Azerbaijani, English, Russian, and Turkish.
 
 ## For machines
 
 - [Sitemap](https://t3.mushafuk.online/sitemap.xml)
 - [robots.txt](https://t3.mushafuk.online/robots.txt)
-- Parent index: https://mushafuk.online/llms.txt
