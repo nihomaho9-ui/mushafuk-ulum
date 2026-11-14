@@ -1,0 +1,24 @@
+# أصول التفسير وعلوم القرآن
+
+> النص العربي الكامل، كل قسم في صفحة. https://t3.mushafuk.online
+
+الفهرس: https://t3.mushafuk.online/ulum/
+القسم: https://t3.mushafuk.online/ulum/{id}/{n}/
+
+## الكتب
+
+- muqaddima-usul: مقدمة في أصول التفسير، ابن تيمية. 11 فصلًا
+- fadail-quran: فضائل القرآن، أبو عبيد. 70 فصلًا
+- funun-afnan: فنون الأفنان، ابن الجوزي. 154 فصلًا
+- asbab-wahidi: أسباب النزول، الواحدي. 86 فصلًا
+- burhan-zarkashi: البرهان في علوم القرآن، الزركشي. 194 قسمًا
+- gharib-ibn-qutayba: غريب القرآن، ابن قتيبة. 115 فصلًا
+- itqan: الإتقان في علوم القرآن، السيوطي. 96 فصلًا. آخر الكتب في الفهرس
+
+مثال: https://t3.mushafuk.online/ulum/itqan/1/
+
+## For machines
+
+- [Sitemap](https://t3.mushafuk.online/sitemap.xml)
+- [robots.txt](https://t3.mushafuk.online/robots.txt)
+- Parent index: https://mushafuk.online/llms.txt
