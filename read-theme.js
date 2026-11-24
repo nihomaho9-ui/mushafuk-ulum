@@ -148,23 +148,36 @@
     var next = null, prev = null, as = pn.querySelectorAll("a[href]");
     for (var i = 0; i < as.length; i++) { var t = (as[i].textContent || "").trim(); if (/التالي/.test(t)) next = as[i].href; else if (/السابق/.test(t)) prev = as[i].href; }
     if (!next && !prev) return;
-    var x = null, y = null, lock = null, dx = 0, mouse = false;
+    var x = null, y = null, t0 = 0, lock = null, lastX = 0, lastY = 0, mouse = false;
     var startT = null;
     function selecting() { try { var s = window.getSelection(); return !!(s && !s.isCollapsed && String(s).length > 0 && startT && s.containsNode && s.containsNode(startT, true)); } catch (e) { return false; } }
+    function shouldTurn(dx, dy, dt) {
+      if (window.QM_shouldTurnPage) return window.QM_shouldTurnPage(dx, dy, dt, window.innerWidth);
+      if (dt >= 800 || selecting()) return 0;
+      var min = Math.max(60, window.innerWidth * 0.15);
+      if (Math.abs(dx) < min || Math.abs(dx) <= 1.5 * Math.abs(dy || 0)) return 0;
+      return dx > 0 ? 1 : -1;
+    }
     // Browsers claim horizontal pans (touchcancel / pointercancel) unless touch-action reserves them for us.
     var st = document.createElement("style"); st.textContent = "main.ulum-book,main.ulum-book *{touch-action:pan-y pinch-zoom}"; (document.head || document.documentElement).appendChild(st);
     function down(px, py, t) {
-      if (t && t.closest && t.closest("a,button,input,textarea,select,#qm-theme-root")) { x = null; return; }
-      startT = t; x = px; y = py; lock = null; dx = 0;
+      if (t && t.closest && t.closest("a,button,input,textarea,select,label,#qm-theme-root")) { x = null; return; }
+      startT = t; x = px; y = py; t0 = performance.now(); lock = null; lastX = px; lastY = py;
     }
     function move(px, py) {
-      if (x == null) return; var ddx = px - x, ddy = py - y; dx = ddx;
-      if (!lock && (Math.abs(ddx) > 8 || Math.abs(ddy) > 8)) lock = Math.abs(ddx) > Math.abs(ddy) * 1.3 ? "x" : "y";
+      if (x == null) return;
+      lastX = px; lastY = py;
+      var ddx = px - x, ddy = py - y;
+      if (!lock && (Math.abs(ddx) > 8 || Math.abs(ddy) > 8)) lock = Math.abs(ddx) > Math.abs(ddy) * 1.5 ? "x" : "y";
     }
     function up() {
-      if (x == null) return; var was = lock, d = dx; x = null; lock = null;
-      if (was !== "x" || Math.abs(d) < 48 || (!mouse && selecting())) return;
-      var u = d > 0 ? next : prev; if (u) location.assign(u);
+      if (x == null) return;
+      var dx = lastX - x, dy = lastY - y, dt = performance.now() - t0, was = lock;
+      x = null; lock = null;
+      if (was === "y") return;
+      if (!mouse && selecting()) return;
+      var dir = shouldTurn(dx, dy, dt);
+      var u = dir > 0 ? next : dir < 0 ? prev : null; if (u) location.assign(u);
     }
     if (window.PointerEvent) {
       var pid = null, mouse = false;
@@ -173,10 +186,10 @@
       document.addEventListener("pointerup", function (e) { if (e.pointerId !== pid) return; pid = null; move(e.clientX, e.clientY); up(); }, { passive: true });
       document.addEventListener("pointercancel", function () { pid = null; x = null; }, { passive: true });
     } else {
-      document.addEventListener("touchstart", function (e) { if (e.touches.length !== 1) { x = null; return; } down(e.touches[0].clientX, e.touches[0].clientY, e.target); }, { passive: true });
-      document.addEventListener("touchmove", function (e) { move(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-      document.addEventListener("touchend", up, { passive: true });
-      document.addEventListener("touchcancel", function () { x = null; }, { passive: true });
+      document.addEventListener("touchstart", function (e) { if (e.touches.length !== 1) { x = null; lock = null; return; } down(e.touches[0].clientX, e.touches[0].clientY, e.target); }, { passive: true });
+      document.addEventListener("touchmove", function (e) { if (e.touches.length !== 1) { x = null; lock = null; return; } move(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      document.addEventListener("touchend", function (e) { if (e.touches && e.touches.length) { x = null; lock = null; return; } up(); }, { passive: true });
+      document.addEventListener("touchcancel", function () { x = null; lock = null; }, { passive: true });
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
